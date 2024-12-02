@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Shop_app.Services;
+using System.Text;
 
 namespace Shop_app
 {
@@ -61,6 +62,11 @@ namespace Shop_app
                 {
                     ValidateIssuer = true,
                     ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer= builder.Configuration["Jwt:Issure"],
+                    ValidAudience = builder.Configuration["Jwt:Audince"],
+                    IssuerSigningKey= new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
 
                 };
             });
